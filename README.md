@@ -1,15 +1,15 @@
 <p align="center">
-<img width="380px" src="https://s2.glbimg.com/gRGlct1eb_8PuB7FpXTpVJtiTVo=/0x0:695x362/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2017/k/m/Lbn0FrTXewbD71idSJ9Q/tor-browser.png" alt="Tor image" />
-</p>
 
-<H3 align="center"> Shell reverso interativo e criptografado usando a rede tor
+<H3 align="center"> Shell reverso interativo e criptografado 
 <H3 align="center">
 
 <img src="https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="Shell" />
 
 <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" />
 
-<img src="https://img.shields.io/badge/Debian-D70A53?style=for-the-badge&logo=debian&logoColor=white" alt="Prisma.io" />
+<img src="https://img.shields.io/badge/Debian-D70A53?style=for-the-badge&logo=debian&logoColor=white" alt="Debian.io" />
+
+<img src="https://img.shields.io/badge/Tor-7D4698?style=for-the-badge&logo=Tor-Browser&logoColor=white" alt="Prisma.io" />
 
 ## O que é shell ?
 
