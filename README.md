@@ -25,7 +25,7 @@ Para entendermos o que é shell reverso precisamos falar de shell. Podemos defin
 
 Com acesso a máquina comprometida, o atacante poderá escalar privilégios para ter acesso administrativo ao sistema.
 
-Podemos criar [shell reverso] (https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md) de várias formas, nesse post utilizarei o socat.
+Podemos criar [shell reverso](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md) de várias formas, nesse post utilizarei o socat.
 
 Primeiramente instale o socat e o openssl:
 
