@@ -89,8 +89,9 @@ Agora o atacante precisa do proxy tor para redirecionar o servidor socat para re
 HiddenServiceDir /var/lib/tor/hidden/
 HiddenServicePort 1111 127.0.0.1:1111
 ```
-Desta forma, todas as requisições que vierem da rede tor pela porta 1111 serão redirecionadas para porta local localhost:1111
-Reiniciar o tor.
+Desta forma, todas as requisições que vierem da rede tor pela porta 1111 serão redirecionadas para localhost:1111.
+
+Agora reinicie o proxy tor:
 
 ```
 systemctl restart tor
