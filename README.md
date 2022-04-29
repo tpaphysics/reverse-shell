@@ -97,9 +97,10 @@ Para descobrir qual é o domínio do atacante na rede tor, digite:
 
 ```bash
 cat /var/lib/tor/service/hidden/hostname
-
-# Aparecerá algo algo assim, exemplo:
-domínio-do-atacante.onion
+```
+A saída do comando retornará algo do tipo, exemplo:
+```url  
+asdejiyamcrsslvykfwnntlaru7p5svn6y2ymmju6nubxndf4zsdefgbnn.onion
 ```
 
 O atacante deve executar:
